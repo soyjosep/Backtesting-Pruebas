@@ -65,7 +65,7 @@ else:
         # Generar todas las combinaciones de medias móviles posibles
         combinations = [(slow_ma, fast_ma, data) for slow_ma in range(1, 101) for fast_ma in range(1, slow_ma)]
         
-        with Pool(processes=cpu_count() // 4) as pool:
+        with Pool(processes=cpu_count()) as pool:
             for slow_ma, fast_ma, profit in tqdm(pool.imap_unordered(process_combination, combinations), total=len(combinations), desc="Backtesting Combinations"):
                 if profit > best_profit:
                     best_profit = profit
